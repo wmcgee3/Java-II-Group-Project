@@ -15,6 +15,7 @@ public class HTTPRequest {
      * @param r - HTTP request string to be parsed
      */
     public HTTPRequest(String r) {
+    	
         validRequest = parse(r);
     }
 
@@ -22,6 +23,7 @@ public class HTTPRequest {
      * Is the request valid
      */
     public boolean isValidRequest() {
+    	
         return (validRequest);
     }
 
@@ -29,6 +31,7 @@ public class HTTPRequest {
      * Return file path for request
      */
     public String getPath() {
+    	
         return (path);
     }
 
@@ -36,8 +39,15 @@ public class HTTPRequest {
      * Parse an HTTP request
      */
     private boolean parse(String r) {
-        // TODO code here
-    	// TODO - DELETE next line
+        if (r != "")
+        {
+        	String[] arrR = r.split("\t\n?", 2);
+        	request = arrR[0];
+        	path = arrR[1];
+        	if (request != "" && path != "") {
+        		validRequest = true;
+        	}
+        }
     	return true;
     }
 }
