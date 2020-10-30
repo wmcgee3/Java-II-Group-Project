@@ -17,7 +17,7 @@ public class Config {
     public static final String DEFAULTFOLDER = "defaultFolder";
 
     private static final String CONFIG_FILE = "./TinyWS.xml";
-    private static Properties properties;
+    private static Properties properties = new Properties();
 
     /**
      * Constructor
@@ -37,7 +37,10 @@ public class Config {
      * @throws IOException - thrown if cannot read configuration file
      */
     public void readProperties() throws IOException {
-    	// TODO code here
+    	File file = new File(CONFIG_FILE);
+		FileInputStream fileInput = new FileInputStream(file);
+		properties.loadFromXML(fileInput);
+		fileInput.close();
     }
 
     /**
