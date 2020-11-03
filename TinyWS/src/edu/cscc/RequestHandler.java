@@ -22,7 +22,7 @@ public class RequestHandler {
      * Process an HTTP request
      */
     public void processRequest() {
-        // TODO code here
+        TinyWS.log("Got a request");
     }
 
     // Read an HTTP Request

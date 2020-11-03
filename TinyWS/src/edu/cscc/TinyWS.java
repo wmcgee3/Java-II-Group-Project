@@ -26,7 +26,9 @@ public class TinyWS {
      */
     public TinyWS() {
         Config config = new Config();
-       // TODO code here
+        port = Integer.parseInt(config.getProperty("port"));
+        defaultFolder = config.getProperty("defaultFolder");
+        defaultPage = config.getProperty("defaultPage");
         config.dumpProperties();
     }
 
@@ -34,7 +36,18 @@ public class TinyWS {
      * Listen on server socket
      */
     public void listen() {
-    	// TODO code here
+    	try {
+			ServerSocket serverSocket = new ServerSocket(port);
+			serverSocket.setSoTimeout(0);
+			while (true) {
+				Socket socket = serverSocket.accept();
+				RequestHandler requestHandler = new RequestHandler(socket);
+				requestHandler.processRequest();
+				socket.close();
+			}
+		} catch (IOException e) {
+			fatalError(e);
+		}
     }
 
     /**
