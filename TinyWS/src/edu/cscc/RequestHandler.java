@@ -46,12 +46,14 @@ public class RequestHandler {
         StringBuilder reqBuf = new StringBuilder();
         char[] cbuf = new char[recbufsize];
         
+        // Problem Area
         String line = brdr.readLine();
         while (line != "\n" && line != null) {
         	reqBuf.append(line);
         	line = brdr.readLine();
         }
-
+        // End Problem Area
+        
         return reqBuf.toString();
     }
 }
