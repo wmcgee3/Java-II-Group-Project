@@ -20,9 +20,19 @@ public class RequestHandler {
 
     /**
      * Process an HTTP request
+     * @throws IOException 
      */
-    public void processRequest() {
-        TinyWS.log("Got a request");
+    public void processRequest() throws IOException {
+        try {
+			String requestString = "GET / HTTP/1.1";
+			HTTPRequest httpRequest = new HTTPRequest(requestString);
+			ResponseHandler responseHandler = new ResponseHandler(httpRequest);
+			responseHandler.sendResponse(connection);
+		} catch (IOException e) {
+			TinyWS.fatalError(e);
+		} finally {
+			connection.close();
+		}
     }
 
     // Read an HTTP Request
@@ -32,13 +42,19 @@ public class RequestHandler {
         int recbufsize = connection.getReceiveBufferSize();
         InputStream in = connection.getInputStream();
         InputStreamReader rdr = new InputStreamReader(in);
-        BufferedReader brdr = new BufferedReader(rdr, recbufsize);
+        BufferedReader brdr = new BufferedReader(rdr);
         StringBuilder reqBuf = new StringBuilder();
         char[] cbuf = new char[recbufsize];
         
-        // TODO code here
+        String line = brdr.readLine();
+        System.out.println(line);
+        while (line != "\n" && line != null) {
+        	reqBuf.append(line);
+        	line = brdr.readLine();
+        }
         
-        // TODO - delete following statement
-        return(null);
+        TinyWS.log("Loop Complete.");
+
+        return reqBuf.toString();
     }
 }

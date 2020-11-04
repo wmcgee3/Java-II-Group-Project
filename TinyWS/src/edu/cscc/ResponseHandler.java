@@ -149,7 +149,15 @@ public class ResponseHandler {
     // Return mimetype based on file suffix (or null if error)
     private String getMimeType(String path) {
         String mimeType = null;
-        // TODO code here
+        if (path.endsWith(".html")) {
+        	mimeType = "text/html";
+        } else if (path.endsWith(".txt")) {
+        	mimeType = "text/plain";
+        } else if (path.endsWith(".gif")) {
+        	mimeType = "image/gif";
+        } else if (path.endsWith(".jpg")) {
+        	mimeType = "image/jpeg";
+        }
         return mimeType;
     }
 }
