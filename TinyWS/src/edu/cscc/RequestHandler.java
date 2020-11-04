@@ -24,7 +24,7 @@ public class RequestHandler {
      */
     public void processRequest() throws IOException {
         try {
-			String requestString = "GET / HTTP/1.1";
+			String requestString = "GET / HTTP/1.1"; //TODO: change to "readRequest();"
 			HTTPRequest httpRequest = new HTTPRequest(requestString);
 			ResponseHandler responseHandler = new ResponseHandler(httpRequest);
 			responseHandler.sendResponse(connection);
@@ -47,13 +47,10 @@ public class RequestHandler {
         char[] cbuf = new char[recbufsize];
         
         String line = brdr.readLine();
-        System.out.println(line);
         while (line != "\n" && line != null) {
         	reqBuf.append(line);
         	line = brdr.readLine();
         }
-        
-        TinyWS.log("Loop Complete.");
 
         return reqBuf.toString();
     }
