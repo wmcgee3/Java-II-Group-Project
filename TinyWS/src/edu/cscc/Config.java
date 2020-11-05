@@ -9,59 +9,62 @@ import java.util.Properties;
 
 /**
  * Process web server configuration
+ * 
  * @author student name
  */
 public class Config {
-    public static final String PORT = "port";
-    public static final String DEFAULTPAGE = "defaultPage";
-    public static final String DEFAULTFOLDER = "defaultFolder";
+	public static final String PORT = "port";
+	public static final String DEFAULTPAGE = "defaultPage";
+	public static final String DEFAULTFOLDER = "defaultFolder";
 
-    private static final String CONFIG_FILE = "./TinyWS.xml";
-    private static Properties properties;
+	private static final String CONFIG_FILE = "./TinyWS.xml";
+	private static Properties properties;
 
-    /**
-     * Constructor
-     */
-    public Config() {
-        try {
-            readProperties();
-        } catch (FileNotFoundException e) {
-            TinyWS.fatalError("Cannot open file: "+CONFIG_FILE);
-        } catch (IOException e) {
-            TinyWS.fatalError(e.getMessage());
-        }
-    }
+	/**
+	 * Constructor
+	 */
+	public Config() {
+		try {
+			readProperties();
+		} catch (FileNotFoundException e) {
+			TinyWS.fatalError("Cannot open file: " + CONFIG_FILE);
+		} catch (IOException e) {
+			TinyWS.fatalError(e.getMessage());
+		}
+	}
 
-    /**
-     * Initialize properties
-     * @throws IOException - thrown if cannot read configuration file
-     */
-    public void readProperties() throws IOException {
-    	File file = new File(CONFIG_FILE);
+	/**
+	 * Initialize properties
+	 * 
+	 * @throws IOException - thrown if cannot read configuration file
+	 */
+	public void readProperties() throws IOException {
+		File file = new File(CONFIG_FILE);
 		FileInputStream fileInput = new FileInputStream(file);
 		properties = new Properties();
 		properties.loadFromXML(fileInput);
 		fileInput.close();
-    }
+	}
 
-    /**
-     * Get a property value
-     * @param key - key associated with property
-     * @return property string
-     */
-    public String getProperty(String key) {
-        return properties.getProperty(key);
-    }
+	/**
+	 * Get a property value
+	 * 
+	 * @param key - key associated with property
+	 * @return property string
+	 */
+	public String getProperty(String key) {
+		return properties.getProperty(key);
+	}
 
-    /**
-     * Debug - list all current properties
-     */
-    public void dumpProperties() {
-        Enumeration<Object> enuKeys = properties.keys();
-        while (enuKeys.hasMoreElements()) {
-            String key = (String) enuKeys.nextElement();
-            String value = properties.getProperty(key);
-            TinyWS.log(key + ": " + value);
-        }
-    }
+	/**
+	 * Debug - list all current properties
+	 */
+	public void dumpProperties() {
+		Enumeration<Object> enuKeys = properties.keys();
+		while (enuKeys.hasMoreElements()) {
+			String key = (String) enuKeys.nextElement();
+			String value = properties.getProperty(key);
+			TinyWS.log(key + ": " + value);
+		}
+	}
 }
