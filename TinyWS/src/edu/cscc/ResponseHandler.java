@@ -154,6 +154,9 @@ public class ResponseHandler {
 			mimeType = "image/gif";
 		} else if (path.endsWith(".jpg")) {
 			mimeType = "image/jpeg";
+		// added for the extra credit page
+		} else if (path.endsWith(".png")) {
+			mimeType = "image/png";
 		}
 		return mimeType;
 	}
